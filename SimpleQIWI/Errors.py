@@ -2,6 +2,10 @@
 # -*- coding: utf-8 -*-
 
 
+class QIWIAPIError(Exception):
+    pass
+
+
 class ArgumentError(Exception):
     pass
 

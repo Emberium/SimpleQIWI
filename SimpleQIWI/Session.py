@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from uuid import uuid4
-from SimpleQIWI import OverridingEx, InvalidTokenError, ArgumentError
+from SimpleQIWI import OverridingEx, InvalidTokenError, ArgumentError, QIWIAPIError
 import requests
 import threading
 import time
@@ -127,6 +127,9 @@ class QApi(object):
 
         json = response.json()
 
+        if 'code' in json or 'errorCode' in json:
+            raise QIWIAPIError(json)
+
         balances = []
 
         for account in json['accounts']:
@@ -158,7 +161,12 @@ class QApi(object):
             params=post_args
         )
 
-        return response.json()
+        data = response.json()
+
+        if 'code' in data or 'errorCode' in data:
+            raise QIWIAPIError(data)
+
+        return data
 
     def bind_echo(self):
         """
@@ -218,6 +226,11 @@ class QApi(object):
             url='https://edge.qiwi.com/sinap/api/v2/terms/99/payments',
             json=post_args
         )
+
+        data = response.json()
+
+        if 'code' in data or 'errorCode' in data:
+            raise QIWIAPIError(data)
 
         return response.json()
 
