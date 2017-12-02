@@ -87,7 +87,7 @@ print("Pay %i rub for %s with comment '%s'" % (price, phone, comment))
 
 
 @api.bind_echo()            # Создаем эхо-функцию.  Она будет вызываться при каждом новом полученном платеже. В качестве аргументов ей
-                            # передаются данные о платеже. 
+                            # передаётся информация о платеже. 
 def foo(bar):
     print("New payment!")
     print(bar)             
