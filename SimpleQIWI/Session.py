@@ -183,23 +183,27 @@ class QApi(object):
 
         return decorator
 
-    def pay(self, account, amount, currency='643', comment=None, tp='Account', acc_id='643'):
+    def pay(self, provider, account, amount, fields=None, currency='643', comment=None, tp='Account', acc_id='643'):
         """
         Transfer to QIWI Wallet
 
+        :type provider: str
         :type account: str
         :type amount: int
         :type currency: str
         :type comment: str
         :type tp: str
         :type acc_id: str
-
+        :type fields: dict
+        
+        :param provider: Provider ID (e.g. https://qiwi.com/payment/form/26580 = 26580) 
         :param account: Phone number of payee
         :param amount: Amount of money for transaction
         :param currency: Currency
         :param comment: Comment for transaction
         :param tp: Type of payee
         :param acc_id: Currency
+        :param fields: whatever you need
 
         :return: response
         """
@@ -222,8 +226,17 @@ class QApi(object):
         if comment is not None:
             post_args['comment'] = comment
 
+        if fields is not None:
+            for key,value in fields.items():
+                post_args['fields'][key] = value
+
+        if provider is not None:
+            url = 'https://edge.qiwi.com/sinap/api/v2/terms/'+provider+'/payments'
+        else:
+            url= 'https://edge.qiwi.com/sinap/api/v2/terms/99/payments'
+
         response = self._s.post(
-            url='https://edge.qiwi.com/sinap/api/v2/terms/99/payments',
+            url=url,
             json=post_args
         )
 

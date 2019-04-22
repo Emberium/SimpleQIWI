@@ -33,6 +33,30 @@ api.pay(account="ТЕЛЕФОН ПОЛУЧАТЕЛЯ", amount=1, comment='При
 
 print(api.balance)
 ```
+### Переводим деньги на счет провайдера QIWI
+```python
+from SimpleQIWI import *
+
+token = "ВАШ ТОКЕН"         # https://qiwi.com/api
+phone = "ВАШ ТЕЛЕФОН"
+
+api = QApi(token=token, phone=phone)
+
+print(api.balance)
+
+# fields НЕОБЯЗАТЕЛЬНЫЙ ПАРАМЕТР (Зависит от оплачиваемой услуги)
+# В большинстве случаев хватает provider (идентификатор провайдера) и account (лицевой счет)
+
+fields{
+	"account_type": "1",
+	"account":"1111********2222",
+	"exp_date": "MMYY"
+}
+
+api.pay(provider='ИДЕНТИФИКАТОР ПРОВАЙДЕРА',account="ПОЛЬЗОВАТЕЛЬСКИЙ СЧЕТ", amount=1, fields=fields)
+
+print(api.balance)
+```
 ### Получаем входящие платежи
 ```python
 from SimpleQIWI import *
