@@ -1,5 +1,5 @@
 # SimpleQIWI: QIWI API for Humans
-Эта библеотека позволит вам производить транзакции и принимать платежи без регистрации магазина.
+Эта библиотека позволит вам производить транзакции и принимать платежи без регистрации магазина.
 ## Установка
 ```bash
 pip install SimpleQIWI
@@ -44,7 +44,7 @@ api = QApi(token=token, phone=phone)
 
 print(api.payments)
 ```
-### Принемаем платежи
+### Принимаем платежи
 ```python
 from SimpleQIWI import *
 from time import sleep
