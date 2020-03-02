@@ -44,7 +44,7 @@ api = QApi(token=token, phone=phone)
 
 print(api.payments)
 ```
-### Принемаем платежи
+### Принимаем платежи
 ```python
 from SimpleQIWI import *
 from time import sleep
