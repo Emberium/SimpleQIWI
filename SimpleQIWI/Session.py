@@ -6,6 +6,8 @@ from SimpleQIWI import OverridingEx, InvalidTokenError, ArgumentError, QIWIAPIEr
 import requests
 import threading
 import time
+from random import *
+
 
 
 class QApi(object):
@@ -86,7 +88,7 @@ class QApi(object):
 
         return balance
 
-    def bill(self, price, comment=uuid4(), currency=643):
+    def bill(self, price, comment=randint(100000, 999999), currency=643):
         """
         Generates bill
 
